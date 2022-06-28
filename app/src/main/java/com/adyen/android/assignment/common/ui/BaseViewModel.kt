@@ -6,7 +6,7 @@ import com.adyen.android.assignment.common.Action
 import com.adyen.android.assignment.common.ViewState
 import kotlinx.coroutines.flow.*
 
-abstract class BaseViewModel<STATES : ViewState, ACTIONS : Action>(val initialState: STATES) :
+abstract class BaseViewModel<STATES : ViewState, ACTIONS : Action>(initialState: STATES) :
     ViewModel() {
     private val _state = MutableStateFlow(initialState)
     val state: StateFlow<STATES>

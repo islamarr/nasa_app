@@ -23,5 +23,9 @@ class MainScreenFragment :
 
     override fun setupOnViewCreated() {}
 
-    override fun handleViewState(it: MainScreenStates) {}
+    override fun handleViewState(it: MainScreenStates) {
+        when(it){
+            is MainScreenStates.InitialState -> viewModel.dispatch(MainScreenActions.LoadPictures(10))
+        }
+    }
 }
