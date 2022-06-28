@@ -30,8 +30,6 @@ abstract class BaseFragment<viewBinding : ViewBinding, STATES : ViewState, ACTIO
 
     abstract val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> viewBinding
 
-    abstract fun screenTitle(): String
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,13 +42,8 @@ abstract class BaseFragment<viewBinding : ViewBinding, STATES : ViewState, ACTIO
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        setToolbarTitle()
         setupOnViewCreated()
         startObserver()
-    }
-
-    private fun setToolbarTitle() {
-        (requireActivity() as AppCompatActivity).supportActionBar?.title = screenTitle()
     }
 
     abstract fun setupOnViewCreated()
