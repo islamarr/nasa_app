@@ -1,4 +1,4 @@
-package com.adyen.android.assignment.api.model
+package com.adyen.android.assignment.features.main_screen.domain.entities
 
 import com.squareup.moshi.Json
 import java.time.LocalDate

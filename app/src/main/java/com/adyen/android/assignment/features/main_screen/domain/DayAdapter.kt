@@ -1,4 +1,4 @@
-package com.adyen.android.assignment.api.model
+package com.adyen.android.assignment.features.main_screen.domain
 
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.ToJson
