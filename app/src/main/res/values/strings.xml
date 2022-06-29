@@ -1,6 +1,18 @@
 <resources>
+    <!-- General -->
     <string name="app_name">Android Assignment</string>
+    <string name="error_message_title">Oops! Something went wrong.</string>
+    <string name="error_message_subtitle">Please refresh the page and try again.</string>
+    <string name="no_internet">No network connection</string>
+    <string name="no_internet_subtitle">Please check your network connection and try again.</string>
+    <string name="network_settings">Network settings</string>
+
+    <!-- Main Screen -->
     <string name="reorder_list">Reorder List</string>
     <string name="our_universe">Our universe</string>
     <string name="latest">Latest</string>
+    <string name="empty_list_message">No pictures found</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
 </resources>

@@ -4,21 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewbinding.ViewBinding
 import com.adyen.android.assignment.common.Action
+import com.adyen.android.assignment.common.Results
+import com.adyen.android.assignment.common.ViewEvents
 import com.adyen.android.assignment.common.ViewState
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-abstract class BaseFragment<viewBinding : ViewBinding, STATES : ViewState, ACTIONS : Action> :
+abstract class BaseFragment<viewBinding : ViewBinding, STATES : ViewState, ACTIONS : Action, EVENTS : ViewEvents, RESULT: Results> :
     Fragment() {
 
-    abstract val viewModel: BaseViewModel<STATES, ACTIONS>
+    abstract val viewModel: BaseViewModel<STATES, ACTIONS, EVENTS, RESULT>
 
     private var _binding: viewBinding? = null
     protected val binding: viewBinding
@@ -43,12 +44,12 @@ abstract class BaseFragment<viewBinding : ViewBinding, STATES : ViewState, ACTIO
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         setupOnViewCreated()
-        startObserver()
+        collectStates()
     }
 
     abstract fun setupOnViewCreated()
 
-    private fun startObserver() {
+    private fun collectStates() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.state.collect {
@@ -58,7 +59,17 @@ abstract class BaseFragment<viewBinding : ViewBinding, STATES : ViewState, ACTIO
         }
     }
 
-    abstract fun handleViewState(it: STATES)
+    fun initViewEvents(handleViewEvents: (event: EVENTS) -> Unit) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiEvent.collect {
+                    handleViewEvents(it)
+                }
+            }
+        }
+    }
+
+    abstract fun handleViewState(it: STATES)  //TODO why open not abstract
 
     override fun onDestroy() {
         _binding = null

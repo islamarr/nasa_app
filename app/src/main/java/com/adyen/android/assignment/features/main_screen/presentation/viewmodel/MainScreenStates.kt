@@ -11,6 +11,4 @@ sealed class MainScreenStates : ViewState {
         MainScreenStates()
 
     object EmptyList : MainScreenStates()
-    data class ShowErrorMessage(val reason: String? = null) : MainScreenStates()
-    object NoInternetConnection : MainScreenStates()
 }
