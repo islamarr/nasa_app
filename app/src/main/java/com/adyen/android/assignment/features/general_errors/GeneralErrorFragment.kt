@@ -19,7 +19,7 @@ class GeneralErrorFragment :
     lateinit var clickAction: () -> Unit
 
     override fun setupOnViewCreated() {
-        arguments?.let {
+        arguments?.let { //TODO code refactor
             val args = it.get(ERROR_NAVIGATION_ARGUMENTS) as ArgumentData
             clickAction = args.onClick
             bindData(args)

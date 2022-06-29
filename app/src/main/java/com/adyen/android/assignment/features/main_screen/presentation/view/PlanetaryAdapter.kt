@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
@@ -43,6 +44,9 @@ class PlanetaryAdapter @Inject constructor() :
         loadImage(view.context, item.url, binding.image)
         binding.date.text = item.date
         binding.title.text = item.title
+        view.rootView.setOnClickListener {
+            it.findNavController().navigate(MainScreenFragmentDirections.actionMainScreenFragmentToDetailsFragment(item))
+        }
     }
 
     inner class ViewHolder<out T : ViewBinding>(val binding: OneItemPlanetaryBinding) :

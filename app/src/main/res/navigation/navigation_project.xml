@@ -14,11 +14,27 @@
         <action
             android:id="@+id/action_mainScreenFragment_to_generalErrorFragment"
             app:destination="@id/generalErrorFragment" />
+
+        <action
+            android:id="@+id/action_mainScreenFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/generalErrorFragment"
         android:name="com.adyen.android.assignment.features.general_errors.GeneralErrorFragment"
         android:label="fragment_general_error"
-        tools:layout="@layout/fragment_general_error"/>
+        tools:layout="@layout/fragment_general_error" />
+
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.adyen.android.assignment.features.details.DetailsFragment"
+        android:label="DetailsFragment">
+
+        <argument
+            android:name="astronomyPicture"
+            app:argType="com.adyen.android.assignment.features.main_screen.domain.entities.AstronomyPicture" />
+
+    </fragment>
 
 </navigation>
