@@ -13,7 +13,9 @@ class MainScreenViewModel @Inject constructor(private val planetaryUseCase: Plan
 
     override fun handle(actions: MainScreenActions): Flow<MainScreenStates> = flow {
         when (actions) {
-            is MainScreenActions.LoadPictures -> emit(planetaryUseCase.execute())
+            is MainScreenActions.LoadAstronomyPicture -> emit(planetaryUseCase.execute())
+            is MainScreenActions.SortByDate -> TODO()
+            is MainScreenActions.SortByTitle -> TODO()
         }
     }
 

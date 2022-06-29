@@ -1,7 +1,6 @@
 package com.adyen.android.assignment.features.main_screen.domain.entities
 
 import com.squareup.moshi.Json
-import java.time.LocalDate
 
 data class AstronomyPicture(
     @Json(name = "service_version")
@@ -12,6 +11,6 @@ data class AstronomyPicture(
     @Json(name = "media_type")
     val mediaType: String,
     @Json(name = "hdurl")
-    val hdUrl: String,
+    val hdUrl: String? = null,
     val url: String,
 )

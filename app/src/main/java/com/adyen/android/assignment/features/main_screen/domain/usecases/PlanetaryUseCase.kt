@@ -1,6 +1,5 @@
 package com.adyen.android.assignment.features.main_screen.domain.usecases
 
-import android.util.Log
 import com.adyen.android.assignment.common.data.NetworkResponse
 import com.adyen.android.assignment.features.main_screen.domain.repositories.PlanetaryRepository
 import com.adyen.android.assignment.features.main_screen.presentation.viewmodel.MainScreenStates
@@ -12,11 +11,12 @@ class PlanetaryUseCase @Inject constructor(private val repository: PlanetaryRepo
         return when (val response = repository.getPictures()) {
             is NetworkResponse.Success -> {
                 response.data?.let {
-                    Log.d("zxcc", "execute: ${it[0].date}")
-                    MainScreenStates.InitialState
-                } ?: MainScreenStates.InitialState
+                    MainScreenStates.AstronomyListLoaded(it)
+                } ?: MainScreenStates.EmptyList
             }
-            is NetworkResponse.Failure -> MainScreenStates.InitialState
+            is NetworkResponse.Failure -> response.reason?.let {
+                MainScreenStates.ShowErrorMessage(response.reason)
+            } ?: MainScreenStates.ShowErrorMessage()
         }
     }
 }
