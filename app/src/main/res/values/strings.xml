@@ -6,14 +6,13 @@
     <string name="no_internet">No network connection</string>
     <string name="no_internet_subtitle">Please check your network connection and try again.</string>
     <string name="network_settings">Network settings</string>
+    <string name="refresh">Refresh</string>
 
     <!-- Main Screen -->
     <string name="reorder_list">Reorder List</string>
     <string name="our_universe">Our universe</string>
     <string name="latest">Latest</string>
     <string name="empty_list_message">No pictures found</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="reset">Reset</string>
     <string name="apply">Apply</string>
     <string name="reorder_by_date">Reorder by date</string>

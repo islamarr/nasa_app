@@ -1,19 +1,25 @@
 package com.adyen.android.assignment.features.main_screen.presentation.viewmodel
 
 import com.adyen.android.assignment.common.ui.BaseViewModel
+import com.adyen.android.assignment.features.main_screen.domain.entities.AstronomyPicture
 import com.adyen.android.assignment.features.main_screen.domain.usecases.PlanetaryUseCase
+import com.adyen.android.assignment.features.main_screen.domain.usecases.SortListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 @HiltViewModel
-class MainScreenViewModel @Inject constructor(private val planetaryUseCase: PlanetaryUseCase) :
+class MainScreenViewModel @Inject constructor(
+    private val planetaryUseCase: PlanetaryUseCase,
+    private val sortListUseCase: SortListUseCase
+) :
     BaseViewModel<MainScreenStates, MainScreenActions, MainScreenEvents, MainScreenResults>(
         MainScreenStates.InitialState
     ) {
 
     var orderTypeSelected = -1
+    private var currentList = listOf<AstronomyPicture>()
 
     override fun handle(actions: MainScreenActions): Flow<MainScreenResults> = flow {
         when (actions) {
@@ -21,8 +27,7 @@ class MainScreenViewModel @Inject constructor(private val planetaryUseCase: Plan
                 emit(MainScreenResults.Loading)
                 emit(planetaryUseCase.execute())
             }
-            is MainScreenActions.SortByDate -> TODO()
-            is MainScreenActions.SortByTitle -> TODO()
+            is MainScreenActions.SortList -> emit(sortListUseCase.execute(actions.sortType, currentList))
         }
     }
 
@@ -36,7 +41,10 @@ class MainScreenViewModel @Inject constructor(private val planetaryUseCase: Plan
                 onViewEvent(MainScreenEvents.NavigateToNoInternetScreen)
                 currentState
             }
-            is MainScreenResults.AstronomyListLoaded -> MainScreenStates.AstronomyListLoaded(result.astronomyPictureList)
+            is MainScreenResults.AstronomyListLoaded -> {
+                currentList = result.astronomyPictureList
+                MainScreenStates.AstronomyListLoaded(currentList)
+            }
             is MainScreenResults.EmptyList -> MainScreenStates.EmptyList
             is MainScreenResults.Loading -> MainScreenStates.Loading
 

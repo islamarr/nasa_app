@@ -61,16 +61,17 @@ class MainScreenFragment :
                 if (selectionId != -1)
                     check(dialogBinding.radioGroup.getChildAt(selectionId).id)
                 setOnCheckedChangeListener { _, checkedId ->
-                    when (checkedId) {
-                        -1 -> selectionId = -1
-                        R.id.reorderByTitleRadio -> selectionId = 0
-                        R.id.reorderByDateRadio -> selectionId = 1
+                    selectionId = when (checkedId) {
+                        R.id.reorderByTitleRadio -> 0
+                        R.id.reorderByDateRadio -> 1
+                        else -> -1
                     }
                 }
             }
 
             dialogBinding.applyBtn.setOnClickListener {
                 viewModel.orderTypeSelected = selectionId
+                sortAstronomyPicture(selectionId)
                 dismiss()
             }
 
@@ -87,17 +88,17 @@ class MainScreenFragment :
             when (it) {
                 is MainScreenEvents.NavigateToErrorScreen ->
                     argumentData = ArgumentData(
-                        "Error",
-                        "Errrorrrrrrrrrrr",
-                        "Refresh"
+                        getString(R.string.error_message_title),
+                        getString(R.string.error_message_subtitle),
+                        getString(R.string.refresh)
                     ) {
                         setFragmentResult(ERROR_KEY, Bundle())
                     }
                 is MainScreenEvents.NavigateToNoInternetScreen ->
                     argumentData = ArgumentData(
-                        "NoInternet",
-                        "NoInternetttttttttttttttttt",
-                        "Net Settings"
+                        getString(R.string.no_internet),
+                        getString(R.string.no_internet_subtitle),
+                        getString(R.string.network_settings)
                     ) {
                         setFragmentResult(ERROR_KEY, Bundle())
                     }
@@ -132,6 +133,10 @@ class MainScreenFragment :
 
     private fun loadAstronomyPicture() {
         viewModel.dispatch(MainScreenActions.LoadAstronomyPicture)
+    }
+
+    private fun sortAstronomyPicture(sortType: Int) {
+        viewModel.dispatch(MainScreenActions.SortList(sortType))
     }
 
     private fun showEmptyList(show: Boolean) {
