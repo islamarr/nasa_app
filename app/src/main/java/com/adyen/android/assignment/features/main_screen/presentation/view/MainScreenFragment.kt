@@ -1,8 +1,11 @@
 package com.adyen.android.assignment.features.main_screen.presentation.view
 
+import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.Window
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -16,6 +19,7 @@ import com.adyen.android.assignment.common.ERROR_KEY
 import com.adyen.android.assignment.common.ERROR_NAVIGATION_ARGUMENTS
 import com.adyen.android.assignment.common.ui.BaseFragment
 import com.adyen.android.assignment.databinding.FragmentMainScreenBinding
+import com.adyen.android.assignment.databinding.ReorderDialogBinding
 import com.adyen.android.assignment.features.general_errors.ArgumentData
 import com.adyen.android.assignment.features.main_screen.presentation.viewmodel.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,15 +42,45 @@ class MainScreenFragment :
     override fun setupOnViewCreated() {
         initRecyclerView()
         setScrollListener()
-
+        observeEvents()
         setFragmentResultListener(ERROR_KEY) { _, _ ->
             loadAstronomyPicture()
         }
+        binding.reorderBtn.setOnClickListener {
+            showDialog()
+        }
 
+    }
+
+    private fun showDialog() {
+        var selectionId = 0
+        val dialogBinding = ReorderDialogBinding.inflate(LayoutInflater.from(context))
+        Dialog(requireActivity()).apply {
+            setCancelable(false)
+            setContentView(dialogBinding.root)
+            show()
+            dialogBinding.applyBtn.setOnClickListener {
+                dismiss()
+            }
+            dialogBinding.resetBtn.setOnClickListener {
+                dialogBinding.radioGroup.clearCheck()
+                selectionId = 0
+            }
+            dialogBinding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
+                when (checkedId) {
+                    -1 -> selectionId = 0
+                    R.id.reorderByTitleRadio -> selectionId = 1
+                    R.id.reorderByDateRadio -> selectionId = 2
+                }
+            }
+        }
+    }
+
+    private fun observeEvents() {
         initViewEvents {
             when (it) {
                 is MainScreenEvents.NavigateToErrorScreen ->
-                    argumentData=  ArgumentData(
+                    argumentData = ArgumentData(
                         "Error",
                         "Errrorrrrrrrrrrr",
                         "Refresh"
@@ -54,7 +88,7 @@ class MainScreenFragment :
                         setFragmentResult(ERROR_KEY, Bundle())
                     }
                 is MainScreenEvents.NavigateToNoInternetScreen ->
-                    argumentData= ArgumentData(
+                    argumentData = ArgumentData(
                         "NoInternet",
                         "NoInternetttttttttttttttttt",
                         "Net Settings"
