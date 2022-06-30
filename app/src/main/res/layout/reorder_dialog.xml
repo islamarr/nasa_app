@@ -6,7 +6,7 @@
     android:minWidth="270dp"
     android:background="@color/on_background"
     android:layout_gravity="center"
-    android:padding="30dp">
+    android:padding="28dp">
 
     <TextView
         android:id="@+id/textView"
@@ -21,7 +21,7 @@
         android:id="@+id/radio_group"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +49,7 @@
         android:id="@+id/applyBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="12dp"
         android:text="@string/apply"
         android:textColor="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,8 +61,8 @@
         android:layout_width="0dp"
         android:gravity="center"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:text="@string/reset"
+        android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/applyBtn" />

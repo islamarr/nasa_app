@@ -2,10 +2,8 @@ package com.adyen.android.assignment.features.main_screen.presentation.view
 
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.Window
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -49,30 +47,38 @@ class MainScreenFragment :
         binding.reorderBtn.setOnClickListener {
             showDialog()
         }
-
     }
 
     private fun showDialog() {
-        var selectionId = 0
+        var selectionId = viewModel.orderTypeSelected
         val dialogBinding = ReorderDialogBinding.inflate(LayoutInflater.from(context))
         Dialog(requireActivity()).apply {
             setCancelable(false)
             setContentView(dialogBinding.root)
             show()
-            dialogBinding.applyBtn.setOnClickListener {
-                dismiss()
-            }
-            dialogBinding.resetBtn.setOnClickListener {
-                dialogBinding.radioGroup.clearCheck()
-                selectionId = 0
-            }
-            dialogBinding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
-                when (checkedId) {
-                    -1 -> selectionId = 0
-                    R.id.reorderByTitleRadio -> selectionId = 1
-                    R.id.reorderByDateRadio -> selectionId = 2
+
+            dialogBinding.radioGroup.apply {
+                if (selectionId != -1)
+                    check(dialogBinding.radioGroup.getChildAt(selectionId).id)
+                setOnCheckedChangeListener { _, checkedId ->
+                    when (checkedId) {
+                        -1 -> selectionId = -1
+                        R.id.reorderByTitleRadio -> selectionId = 0
+                        R.id.reorderByDateRadio -> selectionId = 1
+                    }
                 }
             }
+
+            dialogBinding.applyBtn.setOnClickListener {
+                viewModel.orderTypeSelected = selectionId
+                dismiss()
+            }
+
+            dialogBinding.resetBtn.setOnClickListener {
+                dialogBinding.radioGroup.clearCheck()
+                selectionId = -1
+            }
+
         }
     }
 

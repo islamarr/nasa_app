@@ -13,6 +13,8 @@ class MainScreenViewModel @Inject constructor(private val planetaryUseCase: Plan
         MainScreenStates.InitialState
     ) {
 
+    var orderTypeSelected = -1
+
     override fun handle(actions: MainScreenActions): Flow<MainScreenResults> = flow {
         when (actions) {
             is MainScreenActions.LoadAstronomyPicture -> {
