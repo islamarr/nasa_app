@@ -1,6 +1,7 @@
 package com.adyen.android.assignment.features.general_errors
 
 import android.os.Parcelable
+import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -8,6 +9,6 @@ data class ArgumentData(
     val mainText: String,
     val subTitle: String,
     val actionBtnText: String,
-    val onClick: () -> Unit
+    val typeId : Int
 ) :
     Parcelable

@@ -1,10 +1,7 @@
 package com.adyen.android.assignment.features.details
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.adyen.android.assignment.R
@@ -29,14 +26,16 @@ class DetailsFragment :
 
     override fun setupOnViewCreated() {
         val astronomy = args.astronomyPicture
-        binding.titleText.text = astronomy.title
-        binding.dateText.text = astronomy.date
-        binding.explanation.text = astronomy.explanation
+        binding.apply {
+            titleText.text = astronomy.title
+            dateText.text = astronomy.date
+            explanation.text = astronomy.explanation
+            backBtn.setOnClickListener {
+                navigateUp()
+            }
+        }
         astronomy.hdUrl?.let {
             loadImage(it)
-        }
-        binding.backBtn.setOnClickListener {
-            navigateUp()
         }
     }
 

@@ -18,6 +18,7 @@ class PlanetaryUseCase @Inject constructor(private val repository: PlanetaryRepo
             is NetworkResponse.Failure -> response.reason?.let {
                 MainScreenResults.ErrorMessage(response.reason)
             } ?: MainScreenResults.ErrorMessage()
+            is NetworkResponse.NoInternet -> MainScreenResults.NoInternetConnection
         }
     }
 }

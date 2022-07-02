@@ -1,7 +1,10 @@
 package com.adyen.android.assignment.features.main_screen.presentation.view
 
 import android.app.Dialog
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
@@ -15,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.adyen.android.assignment.R
 import com.adyen.android.assignment.common.ERROR_KEY
 import com.adyen.android.assignment.common.ERROR_NAVIGATION_ARGUMENTS
+import com.adyen.android.assignment.common.navigateUp
 import com.adyen.android.assignment.common.ui.BaseFragment
 import com.adyen.android.assignment.databinding.FragmentMainScreenBinding
 import com.adyen.android.assignment.databinding.ReorderDialogBinding
@@ -90,18 +94,16 @@ class MainScreenFragment :
                     argumentData = ArgumentData(
                         getString(R.string.error_message_title),
                         getString(R.string.error_message_subtitle),
-                        getString(R.string.refresh)
-                    ) {
-                        setFragmentResult(ERROR_KEY, Bundle())
-                    }
+                        getString(R.string.refresh),
+                        0
+                    )
                 is MainScreenEvents.NavigateToNoInternetScreen ->
                     argumentData = ArgumentData(
                         getString(R.string.no_internet),
                         getString(R.string.no_internet_subtitle),
-                        getString(R.string.network_settings)
-                    ) {
-                        setFragmentResult(ERROR_KEY, Bundle())
-                    }
+                        getString(R.string.network_settings),
+                        1
+                    )
 
             }
             val bundle = bundleOf(ERROR_NAVIGATION_ARGUMENTS to argumentData)
@@ -140,9 +142,11 @@ class MainScreenFragment :
     }
 
     private fun showEmptyList(show: Boolean) {
-        binding.loading.isGone = true
-        binding.resultStatusText.isVisible = show
-        binding.astronomyList.isVisible = !show
+        binding.apply {
+            loading.isGone = true
+            resultStatusText.isVisible = show
+            astronomyList.isVisible = !show
+        }
     }
 
     override fun handleViewState(it: MainScreenStates) {

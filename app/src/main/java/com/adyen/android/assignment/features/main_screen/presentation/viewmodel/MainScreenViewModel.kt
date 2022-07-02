@@ -35,11 +35,11 @@ class MainScreenViewModel @Inject constructor(
         return when (result) {
             is MainScreenResults.ErrorMessage -> {
                 onViewEvent(MainScreenEvents.NavigateToErrorScreen)
-                currentState
+                MainScreenStates.InitialState
             }
             is MainScreenResults.NoInternetConnection -> {
                 onViewEvent(MainScreenEvents.NavigateToNoInternetScreen)
-                currentState
+                MainScreenStates.InitialState
             }
             is MainScreenResults.AstronomyListLoaded -> {
                 currentList = result.astronomyPictureList

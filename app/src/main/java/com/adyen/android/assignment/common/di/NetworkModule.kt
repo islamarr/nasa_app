@@ -2,6 +2,7 @@ package com.adyen.android.assignment.common.di
 
 import com.adyen.android.assignment.BuildConfig
 import com.adyen.android.assignment.common.TIME_OUT_IN_SECONDS
+import com.adyen.android.assignment.common.data.ConnectivityInterceptorImpl
 import com.adyen.android.assignment.common.data.URLInterceptor
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
@@ -33,13 +34,15 @@ object NetworkModule {
     @Singleton
     fun provideHttpClient(
         httpLoggingInterceptor: HttpLoggingInterceptor,
-        urlInterceptor: URLInterceptor
+        urlInterceptor: URLInterceptor,
+        connectivityInterceptor: ConnectivityInterceptorImpl
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .readTimeout(TIME_OUT_IN_SECONDS, TimeUnit.SECONDS)
             .writeTimeout(TIME_OUT_IN_SECONDS, TimeUnit.SECONDS)
             .addInterceptor(urlInterceptor)
             .addInterceptor(httpLoggingInterceptor)
+            .addInterceptor(connectivityInterceptor)
             .build()
     }
 

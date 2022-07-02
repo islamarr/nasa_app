@@ -10,4 +10,5 @@ sealed class NetworkResponse<out T> {
         val reason: String? = null,
     ) : NetworkResponse<T>()
 
+    object NoInternet : NetworkResponse<Nothing>()
 }

@@ -18,12 +18,11 @@ interface NetworkServiceCallHandler {
                 NetworkResponse.Success(apiCall.invoke())
             } catch (throwable: Throwable) {
                 when (throwable) {
-                    is HttpException -> {
-                        NetworkResponse.Failure(throwable.response()?.errorBody().toString())
-                    }
-                    else -> {
-                        NetworkResponse.Failure(throwable.message)
-                    }
+                    is HttpException -> NetworkResponse.Failure(
+                        throwable.response()?.errorBody().toString()
+                    )
+                    is NoInternetException -> NetworkResponse.NoInternet
+                    else -> NetworkResponse.Failure(throwable.message)
                 }
             }
         }
