@@ -68,7 +68,7 @@ class MainScreenFragment :
                     selectionId = when (checkedId) {
                         R.id.reorderByTitleRadio -> 0
                         R.id.reorderByDateRadio -> 1
-                        else -> -1
+                        else -> -1 //TODO how to reset to default?
                     }
                 }
             }

@@ -28,7 +28,7 @@
 
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.adyen.android.assignment.features.details.DetailsFragment"
+        android:name="com.adyen.android.assignment.features.details.presentation.view.DetailsFragment"
         android:label="DetailsFragment">
 
         <argument

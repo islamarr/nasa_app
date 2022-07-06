@@ -41,7 +41,9 @@ class PlanetaryAdapter @Inject constructor() :
 
     private fun bind(viewBinding: ViewBinding, item: AstronomyPicture, view: View) {
         val binding = viewBinding as OneItemPlanetaryBinding
-        loadImage(view.context, item.url, binding.image)
+        item.url?.let {
+            loadImage(view.context, it, binding.image)
+        }
         binding.date.text = item.date
         binding.title.text = item.title
         view.rootView.setOnClickListener {
