@@ -12,12 +12,10 @@ import javax.inject.Inject
 class GetFavoriteUseCase @Inject constructor(private val repository: DetailsRepository) {
 
     suspend fun execute(title: String?, date: String?): DetailsResults {
-        return withContext(Dispatchers.IO) {
-            val result = repository.getOneFavoriteItem(title, date)
-             result?.let {
-                DetailsResults.SavedState(true)
-            } ?: DetailsResults.SavedState(false)
-        }
+        val result = repository.getOneFavoriteItem(title, date)
+        return result?.let {
+            DetailsResults.SavedState(true)
+        } ?: DetailsResults.SavedState(false)
     }
 
 }

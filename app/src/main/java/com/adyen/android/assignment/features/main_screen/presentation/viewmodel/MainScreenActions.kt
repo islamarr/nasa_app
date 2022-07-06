@@ -4,5 +4,6 @@ import com.adyen.android.assignment.common.Action
 
 sealed class MainScreenActions : Action {
     object LoadAstronomyPicture : MainScreenActions()
+    object LoadFavoriteList : MainScreenActions()
     data class SortList(val sortType: Int) : MainScreenActions()
 }

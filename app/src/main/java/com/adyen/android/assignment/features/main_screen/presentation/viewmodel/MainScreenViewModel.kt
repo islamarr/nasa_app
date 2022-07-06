@@ -1,18 +1,22 @@
 package com.adyen.android.assignment.features.main_screen.presentation.viewmodel
 
 import com.adyen.android.assignment.common.ui.BaseViewModel
+import com.adyen.android.assignment.features.details.domain.usecases.GetFavoriteUseCase
 import com.adyen.android.assignment.features.main_screen.domain.entities.AstronomyPicture
+import com.adyen.android.assignment.features.main_screen.domain.usecases.FavoriteListUseCase
 import com.adyen.android.assignment.features.main_screen.domain.usecases.PlanetaryUseCase
 import com.adyen.android.assignment.features.main_screen.domain.usecases.SortListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 @HiltViewModel
 class MainScreenViewModel @Inject constructor(
     private val planetaryUseCase: PlanetaryUseCase,
-    private val sortListUseCase: SortListUseCase
+    private val sortListUseCase: SortListUseCase,
+    private val favoriteListUseCase: FavoriteListUseCase
 ) :
     BaseViewModel<MainScreenStates, MainScreenActions, MainScreenEvents, MainScreenResults>(
         MainScreenStates.InitialState
@@ -28,6 +32,7 @@ class MainScreenViewModel @Inject constructor(
                 emit(planetaryUseCase.execute())
             }
             is MainScreenActions.SortList -> emit(sortListUseCase.execute(actions.sortType, currentList))
+            is MainScreenActions.LoadFavoriteList -> emitAll(favoriteListUseCase.execute())
         }
     }
 
@@ -47,7 +52,10 @@ class MainScreenViewModel @Inject constructor(
             }
             is MainScreenResults.EmptyList -> MainScreenStates.EmptyList
             is MainScreenResults.Loading -> MainScreenStates.Loading
-
+            is MainScreenResults.EmptyFavoriteList -> MainScreenStates.EmptyFavoriteList
+            is MainScreenResults.FavoriteListLoaded ->{
+                MainScreenStates.FavoriteListLoaded(result.astronomyPictureList)
+            }
         }
 
     }

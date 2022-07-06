@@ -1,16 +1,11 @@
 package com.adyen.android.assignment.features.main_screen.presentation.view
 
 import android.app.Dialog
-import android.content.Intent
-import android.os.Build
-import android.os.Bundle
-import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -18,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.adyen.android.assignment.R
 import com.adyen.android.assignment.common.ERROR_KEY
 import com.adyen.android.assignment.common.ERROR_NAVIGATION_ARGUMENTS
-import com.adyen.android.assignment.common.navigateUp
 import com.adyen.android.assignment.common.ui.BaseFragment
 import com.adyen.android.assignment.databinding.FragmentMainScreenBinding
 import com.adyen.android.assignment.databinding.ReorderDialogBinding
@@ -40,6 +34,9 @@ class MainScreenFragment :
 
     @Inject
     lateinit var planetaryAdapter: PlanetaryAdapter
+
+    @Inject
+    lateinit var favoriteAdapter: FavoriteAdapter
 
     override fun setupOnViewCreated() {
         initRecyclerView()
@@ -114,6 +111,7 @@ class MainScreenFragment :
 
     private fun initRecyclerView() {
         binding.astronomyList.adapter = planetaryAdapter
+        binding.favoriteList.adapter = favoriteAdapter
     }
 
     private fun setScrollListener() {
@@ -135,6 +133,7 @@ class MainScreenFragment :
 
     private fun loadAstronomyPicture() {
         viewModel.dispatch(MainScreenActions.LoadAstronomyPicture)
+        viewModel.dispatch(MainScreenActions.LoadFavoriteList) // TODO change method name
     }
 
     private fun sortAstronomyPicture(sortType: Int) {
@@ -161,6 +160,11 @@ class MainScreenFragment :
                 showEmptyList(true)
                 binding.resultStatusText.text = getString(R.string.empty_list_message)
             }
+            is MainScreenStates.FavoriteListLoaded -> {
+                binding.favoriteGroup.isVisible = true
+                favoriteAdapter.submitList(it.astronomyPictureList)
+            }
+            is MainScreenStates.EmptyFavoriteList -> binding.favoriteGroup.isVisible = false
         }
     }
 }

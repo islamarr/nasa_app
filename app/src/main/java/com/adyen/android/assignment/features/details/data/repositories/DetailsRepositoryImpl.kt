@@ -3,7 +3,9 @@ package com.adyen.android.assignment.features.details.data.repositories
 import com.adyen.android.assignment.features.details.data.db.FavoriteDao
 import com.adyen.android.assignment.features.details.domain.repositories.DetailsRepository
 import com.adyen.android.assignment.features.main_screen.domain.entities.AstronomyPicture
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class DetailsRepositoryImpl @Inject constructor(
@@ -19,9 +21,13 @@ class DetailsRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getFavoriteList(): Flow<List<AstronomyPicture>> =
-        favoriteDao.getFavoriteList()
+        withContext(Dispatchers.IO) { //TODO inject dispatcher
+            favoriteDao.getFavoriteList()
+        }
 
     override suspend fun getOneFavoriteItem(title: String?, date: String?): AstronomyPicture? =
-        favoriteDao.getOneFavoriteAlbum(title?: "", date?: "")
+        withContext(Dispatchers.IO) { //TODO inject dispatcher
+            favoriteDao.getOneFavoriteAlbum(title ?: "", date ?: "")
+        }
 
 }

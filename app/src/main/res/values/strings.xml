@@ -17,5 +17,6 @@
     <string name="apply">Apply</string>
     <string name="reorder_by_date">Reorder by date</string>
     <string name="reorder_by_title">Reorder by title</string>
+    <string name="favorite">Favorite</string>
 
 </resources>
