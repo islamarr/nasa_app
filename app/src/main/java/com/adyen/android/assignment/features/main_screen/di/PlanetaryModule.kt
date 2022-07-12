@@ -12,6 +12,6 @@ import dagger.hilt.android.components.ViewModelComponent
 abstract class PlanetaryModule {
 
     @Binds
-    abstract fun bindTopAlbumsRepository(repository: PlanetaryRepositoryImpl): PlanetaryRepository
+    abstract fun bindPlanetaryRepository(repository: PlanetaryRepositoryImpl): PlanetaryRepository
 
 }

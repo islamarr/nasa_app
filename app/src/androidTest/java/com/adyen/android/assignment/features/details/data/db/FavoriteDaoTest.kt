@@ -75,7 +75,7 @@ internal class FavoriteDaoTest : TestCase() {
         )
         favoriteDao.addToFavoriteList(item)
         val favorite =
-            favoriteDao.getOneFavoriteAlbum(item.title!!, item.date!!)
+            favoriteDao.getOneFavoriteItem(item.title!!, item.date!!)
         assertThat(favorite, CoreMatchers.equalTo(item))
     }
 

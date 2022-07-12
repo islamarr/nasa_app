@@ -21,6 +21,6 @@ interface FavoriteDao {
     fun getFavoriteList(): Flow<List<AstronomyPicture>>
 
     @Query("SELECT * FROM favorite WHERE title = :title AND date = :date")
-    fun getOneFavoriteAlbum(title: String, date: String): AstronomyPicture?
+    fun getOneFavoriteItem(title: String, date: String): AstronomyPicture?
 
 }

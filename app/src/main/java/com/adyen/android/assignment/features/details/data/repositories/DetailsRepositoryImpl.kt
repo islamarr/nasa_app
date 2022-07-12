@@ -28,7 +28,7 @@ class DetailsRepositoryImpl @Inject constructor(
 
     override suspend fun getOneFavoriteItem(title: String?, date: String?): AstronomyPicture? =
         withContext(dispatchers.io) {
-            favoriteDao.getOneFavoriteAlbum(title ?: "", date ?: "")
+            favoriteDao.getOneFavoriteItem(title ?: "", date ?: "")
         }
 
 }

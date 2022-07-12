@@ -12,6 +12,6 @@ import dagger.hilt.android.components.ViewModelComponent
 abstract class DetailsModule {
 
     @Binds
-    abstract fun bindAlbumDetailsRepository(repository: DetailsRepositoryImpl): DetailsRepository
+    abstract fun bindDetailsRepository(repository: DetailsRepositoryImpl): DetailsRepository
 
 }
