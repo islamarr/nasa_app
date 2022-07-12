@@ -73,18 +73,5 @@ internal class PlanetaryUseCaseTest {
 
         assertEquals(actual, expected)
     }
-/*
-
-
-    @Test
-    fun `when get null response return ShowErrorMessage`() = runTest {
-        val albumParams = AlbumParams(artistName = "artist", albumName = "album")
-        whenever(repository.getAlbumDetails(albumParams)).thenReturn(DataResponse.Success(null))
-
-        val actual = useCase.execute(albumParams)
-        val expected = AlbumDetailsStates.ShowErrorMessage()
-
-        assertEquals(actual, expected)
-    }*/
 
 }
