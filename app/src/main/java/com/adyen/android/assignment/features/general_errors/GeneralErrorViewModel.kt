@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GeneralErrorViewModel @Inject constructor() :
-    BaseViewModel<ViewState, Action, ViewEvents, Results>() { //TODO remove unused view model
+    BaseViewModel<ViewState, Action, ViewEvents, Results>() {
 
     override fun handle(actions: Action): Flow<Results> = flow {}
     override fun reduce(result: Results): ViewState {

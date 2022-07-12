@@ -42,7 +42,7 @@ class MainScreenFragment :
         setScrollListener()
         observeEvents()
         setFragmentResultListener(ERROR_KEY) { _, _ ->
-            loadAstronomyLists()//TODO don't call twice
+            loadAstronomyLists()
         }
         binding.reorderBtn.setOnClickListener {
             showDialog()

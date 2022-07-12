@@ -55,7 +55,7 @@ class PlanetaryAdapter @Inject constructor() :
         RecyclerView.ViewHolder(binding.root)
 
     private fun loadImage(context: Context, url: String, imageView: ImageView) {
-        Glide.with(context).load(url) //TODO not full rounded
+        Glide.with(context).load(url)
             .placeholder(R.drawable.ic_placeholder)
             .transition(DrawableTransitionOptions.withCrossFade())
             .thumbnail(IMAGE_SIZE_MULTIPLIER)

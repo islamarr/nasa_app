@@ -17,7 +17,7 @@ abstract class BaseViewModel<STATES : ViewState, ACTIONS : Action, EVENTS : View
     val currentState: STATES
         get() = state.replayCache[0]
 
-    private val _state = MutableSharedFlow<STATES>(replay = 2) //TODO Fix add to fav then rotate
+    private val _state = MutableSharedFlow<STATES>(replay = 2)
     val state: SharedFlow<STATES>
         get() = _state.asSharedFlow()
 
