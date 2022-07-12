@@ -120,6 +120,7 @@ dependencies {
     androidTestImplementation 'androidx.test:core-ktx:1.4.0'
     // Coroutines testing
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.2'
+    androidTestImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.2'
 
     // Hilt testing dependency
     androidTestImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
