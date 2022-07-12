@@ -18,12 +18,15 @@ class MainScreenViewModel @Inject constructor(
     private val sortListUseCase: SortListUseCase,
     private val favoriteListUseCase: FavoriteListUseCase
 ) :
-    BaseViewModel<MainScreenStates, MainScreenActions, MainScreenEvents, MainScreenResults>(
-        MainScreenStates.InitialState
-    ) {
+    BaseViewModel<MainScreenStates, MainScreenActions, MainScreenEvents, MainScreenResults>() {
 
     var orderTypeSelected = UNSORTED
     private var currentList = listOf<AstronomyPicture>()
+
+    init {
+        dispatch(MainScreenActions.LoadAstronomyPicture)
+        dispatch(MainScreenActions.LoadFavoriteList)
+    }
 
     override fun handle(actions: MainScreenActions): Flow<MainScreenResults> = flow {
         when (actions) {

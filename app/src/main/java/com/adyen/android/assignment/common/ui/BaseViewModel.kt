@@ -7,20 +7,19 @@ import com.adyen.android.assignment.common.Results
 import com.adyen.android.assignment.common.ViewEvents
 import com.adyen.android.assignment.common.ViewState
 import com.adyen.android.assignment.features.main_screen.presentation.viewmodel.MainScreenEvents
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-abstract class BaseViewModel<STATES : ViewState, ACTIONS : Action, EVENTS : ViewEvents, RESULT : Results>(
-    initialState: STATES
-) : ViewModel() {
+abstract class BaseViewModel<STATES : ViewState, ACTIONS : Action, EVENTS : ViewEvents, RESULT : Results> : ViewModel() {
 
     val currentState: STATES
-        get() = state.value
+        get() = state.replayCache[0]
 
-    private val _state = MutableStateFlow(initialState)
-    val state: StateFlow<STATES>
-        get() = _state.asStateFlow()
+    private val _state = MutableSharedFlow<STATES>(replay = 2)
+    val state: SharedFlow<STATES>
+        get() = _state.asSharedFlow()
 
     private val _uiEvent: Channel<EVENTS> = Channel()
     val uiEvent = _uiEvent.receiveAsFlow()
