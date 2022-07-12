@@ -29,12 +29,20 @@ class GeneralErrorFragment :
     private var typeId: Int = 0
 
     override fun setupOnViewCreated() {
-        arguments?.let { //TODO code refactor
+        handleArguments()
+        handleClickListener()
+        observeNetworkStatus()
+    }
+
+    private fun handleArguments() {
+        arguments?.let {
             val args = it.get(ERROR_NAVIGATION_ARGUMENTS) as ArgumentData
             typeId = args.typeId
             bindData(args)
         }
+    }
 
+    private fun handleClickListener() {
         binding.actionButton.setOnClickListener {
             when (typeId) {
                 0 -> handleBack()
@@ -53,15 +61,17 @@ class GeneralErrorFragment :
                 }
             }
         }
+    }
 
+    private fun observeNetworkStatus() {
         networkUtils.getNetworkStatus()
         networkUtils.networkLiveData.observe(viewLifecycleOwner) {
             if (it) {
                 handleBack()
             }
         }
-
     }
+
 
     private fun handleBack() {
         setFragmentResult(ERROR_KEY, Bundle())

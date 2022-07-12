@@ -3,9 +3,7 @@ package com.adyen.android.assignment.features.main_screen.domain.entities
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.adyen.android.assignment.common.CURRENT_FAVORITE_ID
 import com.squareup.moshi.Json
-import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "favorite")

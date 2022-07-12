@@ -43,7 +43,7 @@ class MainScreenFragment :
         setScrollListener()
         observeEvents()
         setFragmentResultListener(ERROR_KEY) { _, _ ->
-            loadAstronomyPicture()
+            loadAstronomyLists()
         }
         binding.reorderBtn.setOnClickListener {
             showDialog()
@@ -131,9 +131,9 @@ class MainScreenFragment :
         })
     }
 
-    private fun loadAstronomyPicture() {
+    private fun loadAstronomyLists() {
         viewModel.dispatch(MainScreenActions.LoadAstronomyPicture)
-        viewModel.dispatch(MainScreenActions.LoadFavoriteList) // TODO change method name
+        viewModel.dispatch(MainScreenActions.LoadFavoriteList)
     }
 
     private fun sortAstronomyPicture(sortType: Int) {
@@ -150,9 +150,7 @@ class MainScreenFragment :
 
     override fun handleViewState(it: MainScreenStates) {
         when (it) {
-            is MainScreenStates.InitialState -> {
-                loadAstronomyPicture()
-            } //TODO move it to viewmodel
+            is MainScreenStates.InitialState -> loadAstronomyLists()
             is MainScreenStates.Loading -> binding.loading.isVisible = true
             is MainScreenStates.AstronomyListLoaded -> {
                 showEmptyList(false)
