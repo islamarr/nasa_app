@@ -26,7 +26,7 @@ class GeneralErrorFragment :
     @Inject
     lateinit var networkUtils: NetworkUtils
 
-    private var typeId: Int = 0
+    private var typeId: Int = GENERAL_ERROR_TYPE
 
     override fun setupOnViewCreated() {
         handleArguments()
@@ -45,8 +45,8 @@ class GeneralErrorFragment :
     private fun handleClickListener() {
         binding.actionButton.setOnClickListener {
             when (typeId) {
-                0 -> handleBack()
-                1 -> navigateToNetworkSettings()
+                GENERAL_ERROR_TYPE -> handleBack()
+                NETWORK_ERROR_TYPE -> navigateToNetworkSettings()
             }
         }
     }

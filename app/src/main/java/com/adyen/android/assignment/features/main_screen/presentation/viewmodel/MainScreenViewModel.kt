@@ -1,7 +1,7 @@
 package com.adyen.android.assignment.features.main_screen.presentation.viewmodel
 
+import com.adyen.android.assignment.common.UNSORTED
 import com.adyen.android.assignment.common.ui.BaseViewModel
-import com.adyen.android.assignment.features.details.domain.usecases.GetFavoriteUseCase
 import com.adyen.android.assignment.features.main_screen.domain.entities.AstronomyPicture
 import com.adyen.android.assignment.features.main_screen.domain.usecases.FavoriteListUseCase
 import com.adyen.android.assignment.features.main_screen.domain.usecases.PlanetaryUseCase
@@ -22,7 +22,7 @@ class MainScreenViewModel @Inject constructor(
         MainScreenStates.InitialState
     ) {
 
-    var orderTypeSelected = -1
+    var orderTypeSelected = UNSORTED
     private var currentList = listOf<AstronomyPicture>()
 
     override fun handle(actions: MainScreenActions): Flow<MainScreenResults> = flow {
@@ -31,7 +31,12 @@ class MainScreenViewModel @Inject constructor(
                 emit(MainScreenResults.Loading)
                 emit(planetaryUseCase.execute())
             }
-            is MainScreenActions.SortList -> emit(sortListUseCase.execute(actions.sortType, currentList))
+            is MainScreenActions.SortList -> emit(
+                sortListUseCase.execute(
+                    actions.sortType,
+                    currentList
+                )
+            )
             is MainScreenActions.LoadFavoriteList -> emitAll(favoriteListUseCase.execute())
         }
     }
@@ -50,12 +55,14 @@ class MainScreenViewModel @Inject constructor(
                 currentList = result.astronomyPictureList
                 MainScreenStates.AstronomyListLoaded(currentList)
             }
+            is MainScreenResults.FilteredList -> {
+                MainScreenStates.FilteredList(result.astronomyPictureList)
+            }
             is MainScreenResults.EmptyList -> MainScreenStates.EmptyList
             is MainScreenResults.Loading -> MainScreenStates.Loading
             is MainScreenResults.EmptyFavoriteList -> MainScreenStates.EmptyFavoriteList
-            is MainScreenResults.FavoriteListLoaded ->{
-                MainScreenStates.FavoriteListLoaded(result.astronomyPictureList)
-            }
+            is MainScreenResults.FavoriteListLoaded -> MainScreenStates.FavoriteListLoaded(result.astronomyPictureList)
+
         }
 
     }

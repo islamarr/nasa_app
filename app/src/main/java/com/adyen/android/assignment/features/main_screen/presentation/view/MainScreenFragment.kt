@@ -11,8 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.adyen.android.assignment.R
-import com.adyen.android.assignment.common.ERROR_KEY
-import com.adyen.android.assignment.common.ERROR_NAVIGATION_ARGUMENTS
+import com.adyen.android.assignment.common.*
 import com.adyen.android.assignment.common.ui.BaseFragment
 import com.adyen.android.assignment.databinding.FragmentMainScreenBinding
 import com.adyen.android.assignment.databinding.ReorderDialogBinding
@@ -43,7 +42,7 @@ class MainScreenFragment :
         setScrollListener()
         observeEvents()
         setFragmentResultListener(ERROR_KEY) { _, _ ->
-            loadAstronomyLists()
+            loadAstronomyLists()//TODO don't call twice
         }
         binding.reorderBtn.setOnClickListener {
             showDialog()
@@ -59,13 +58,13 @@ class MainScreenFragment :
             show()
 
             dialogBinding.radioGroup.apply {
-                if (selectionId != -1)
+                if (selectionId != UNSORTED)
                     check(dialogBinding.radioGroup.getChildAt(selectionId).id)
                 setOnCheckedChangeListener { _, checkedId ->
                     selectionId = when (checkedId) {
-                        R.id.reorderByTitleRadio -> 0
-                        R.id.reorderByDateRadio -> 1
-                        else -> -1 //TODO how to reset to default?
+                        R.id.reorderByTitleRadio -> TITLE_SORT
+                        R.id.reorderByDateRadio -> DATE_SORT
+                        else -> UNSORTED
                     }
                 }
             }
@@ -78,7 +77,7 @@ class MainScreenFragment :
 
             dialogBinding.resetBtn.setOnClickListener {
                 dialogBinding.radioGroup.clearCheck()
-                selectionId = -1
+                selectionId = UNSORTED
             }
 
         }
@@ -92,14 +91,14 @@ class MainScreenFragment :
                         getString(R.string.error_message_title),
                         getString(R.string.error_message_subtitle),
                         getString(R.string.refresh),
-                        0
+                        GENERAL_ERROR_TYPE
                     )
                 is MainScreenEvents.NavigateToNoInternetScreen ->
                     argumentData = ArgumentData(
                         getString(R.string.no_internet),
                         getString(R.string.no_internet_subtitle),
                         getString(R.string.network_settings),
-                        1
+                        NETWORK_ERROR_TYPE
                     )
 
             }
@@ -156,6 +155,7 @@ class MainScreenFragment :
                 showEmptyList(false)
                 planetaryAdapter.submitList(it.astronomyPictureList)
             }
+            is MainScreenStates.FilteredList -> planetaryAdapter.submitList(it.astronomyPictureList)
             is MainScreenStates.EmptyList -> {
                 showEmptyList(true)
                 binding.resultStatusText.text = getString(R.string.empty_list_message)

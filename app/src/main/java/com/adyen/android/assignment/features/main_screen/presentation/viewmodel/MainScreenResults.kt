@@ -10,6 +10,8 @@ sealed class MainScreenResults : Results {
     object Loading : MainScreenResults()
     data class AstronomyListLoaded(val astronomyPictureList: List<AstronomyPicture>) :
         MainScreenResults()
+    data class FilteredList(val astronomyPictureList: List<AstronomyPicture>) :
+        MainScreenResults()
     object EmptyList : MainScreenResults()
     data class ErrorMessage(val reason: String? = null) : MainScreenResults()
     object NoInternetConnection : MainScreenResults()
