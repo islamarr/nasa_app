@@ -19,7 +19,7 @@ internal class PlanetaryUseCaseTest {
     @Mock
     private lateinit var repository: PlanetaryRepository
 
-    lateinit var useCase: PlanetaryUseCase
+    private lateinit var useCase: PlanetaryUseCase
 
     @Before
     fun setUp() {
