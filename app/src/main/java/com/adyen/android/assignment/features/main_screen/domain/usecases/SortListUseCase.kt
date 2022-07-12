@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class SortListUseCase @Inject constructor() {
 
-    fun execute(
+    operator fun invoke(
         sortType: Int,
         list: List<AstronomyPicture>
     ): MainScreenResults {

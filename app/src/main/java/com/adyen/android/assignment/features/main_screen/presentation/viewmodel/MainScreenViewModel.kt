@@ -35,7 +35,7 @@ class MainScreenViewModel @Inject constructor(
                 emit(planetaryUseCase.execute())
             }
             is MainScreenActions.SortList -> emit(
-                sortListUseCase.execute(
+                sortListUseCase.invoke(
                     actions.sortType,
                     currentList
                 )
@@ -58,9 +58,7 @@ class MainScreenViewModel @Inject constructor(
                 currentList = result.astronomyPictureList
                 MainScreenStates.AstronomyListLoaded(currentList)
             }
-            is MainScreenResults.FilteredList -> {
-                MainScreenStates.FilteredList(result.astronomyPictureList)
-            }
+            is MainScreenResults.FilteredList -> MainScreenStates.FilteredList(result.astronomyPictureList)
             is MainScreenResults.EmptyList -> MainScreenStates.EmptyList
             is MainScreenResults.Loading -> MainScreenStates.Loading
             is MainScreenResults.EmptyFavoriteList -> MainScreenStates.EmptyFavoriteList
