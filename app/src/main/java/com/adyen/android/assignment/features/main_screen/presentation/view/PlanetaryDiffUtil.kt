@@ -6,7 +6,7 @@ import com.adyen.android.assignment.features.main_screen.domain.entities.Astrono
 class PlanetaryDiffUtil : DiffUtil.ItemCallback<AstronomyPicture>() {
 
     override fun areItemsTheSame(oldItem: AstronomyPicture, newItem: AstronomyPicture) =
-        oldItem == newItem //TODO edit this
+        oldItem.id == newItem.id
 
     override fun areContentsTheSame(oldItem: AstronomyPicture, newItem: AstronomyPicture) =
         oldItem == newItem

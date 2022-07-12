@@ -150,7 +150,9 @@ class MainScreenFragment :
 
     override fun handleViewState(it: MainScreenStates) {
         when (it) {
-            is MainScreenStates.InitialState -> loadAstronomyPicture() //TODO move it to viewmodel
+            is MainScreenStates.InitialState -> {
+                loadAstronomyPicture()
+            } //TODO move it to viewmodel
             is MainScreenStates.Loading -> binding.loading.isVisible = true
             is MainScreenStates.AstronomyListLoaded -> {
                 showEmptyList(false)

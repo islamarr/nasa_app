@@ -16,7 +16,7 @@ import com.adyen.android.assignment.common.ViewState
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-abstract class BaseFragment<viewBinding : ViewBinding, STATES : ViewState, ACTIONS : Action, EVENTS : ViewEvents, RESULT: Results> :
+abstract class BaseFragment<viewBinding : ViewBinding, STATES : ViewState, ACTIONS : Action, EVENTS : ViewEvents, RESULT : Results> :
     Fragment() {
 
     abstract val viewModel: BaseViewModel<STATES, ACTIONS, EVENTS, RESULT>
@@ -69,7 +69,7 @@ abstract class BaseFragment<viewBinding : ViewBinding, STATES : ViewState, ACTIO
         }
     }
 
-    abstract fun handleViewState(it: STATES)  //TODO why open not abstract
+    open fun handleViewState(it: STATES) {}
 
     override fun onDestroy() {
         _binding = null

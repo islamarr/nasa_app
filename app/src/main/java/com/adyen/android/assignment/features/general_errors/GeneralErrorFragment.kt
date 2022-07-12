@@ -9,16 +9,22 @@ import android.view.ViewGroup
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import com.adyen.android.assignment.common.*
+import com.adyen.android.assignment.common.data.NetworkUtils
 import com.adyen.android.assignment.common.ui.BaseFragment
 import com.adyen.android.assignment.databinding.FragmentGeneralErrorBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class GeneralErrorFragment :
     BaseFragment<FragmentGeneralErrorBinding, ViewState, Action, ViewEvents, Results>() {
 
+    override val viewModel: GeneralErrorViewModel by viewModels()
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentGeneralErrorBinding
         get() = FragmentGeneralErrorBinding::inflate
+
+    @Inject
+    lateinit var networkUtils: NetworkUtils
 
     private var typeId: Int = 0
 
@@ -31,10 +37,10 @@ class GeneralErrorFragment :
 
         binding.actionButton.setOnClickListener {
             when (typeId) {
-                0 -> setFragmentResult(ERROR_KEY, Bundle())
+                0 -> handleBack()
                 1 -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                        startActivity(Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY)) //TODO onBack should click twice
+                        startActivity(Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY))
                     } else {
                         Intent(Intent.ACTION_MAIN).apply {
                             setClassName(
@@ -46,9 +52,20 @@ class GeneralErrorFragment :
                     }
                 }
             }
-            navigateUp()
         }
 
+        networkUtils.getNetworkStatus()
+        networkUtils.networkLiveData.observe(viewLifecycleOwner) {
+            if (it) {
+                handleBack()
+            }
+        }
+
+    }
+
+    private fun handleBack() {
+        setFragmentResult(ERROR_KEY, Bundle())
+        navigateUp()
     }
 
     private fun bindData(args: ArgumentData) {
@@ -56,9 +73,5 @@ class GeneralErrorFragment :
         binding.mainMessage.text = args.mainText
         binding.subTitle.text = args.subTitle
     }
-
-    override val viewModel: GeneralErrorViewModel by viewModels() //TODO remove viewmodel
-    override fun handleViewState(it: ViewState) {}
-
 
 }
