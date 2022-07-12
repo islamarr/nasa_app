@@ -39,7 +39,7 @@ class MainScreenFragment :
     lateinit var favoriteAdapter: FavoriteAdapter
 
     override fun setupOnViewCreated() {
-        initRecyclerView()
+        initRecyclerViews()
         setScrollListener()
         observeEvents()
         setFragmentResultListener(ERROR_KEY) { _, _ ->
@@ -109,7 +109,7 @@ class MainScreenFragment :
         }
     }
 
-    private fun initRecyclerView() {
+    private fun initRecyclerViews() {
         binding.astronomyList.adapter = planetaryAdapter
         binding.favoriteList.adapter = favoriteAdapter
     }

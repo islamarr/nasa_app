@@ -46,19 +46,21 @@ class GeneralErrorFragment :
         binding.actionButton.setOnClickListener {
             when (typeId) {
                 0 -> handleBack()
-                1 -> {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                        startActivity(Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY))
-                    } else {
-                        Intent(Intent.ACTION_MAIN).apply {
-                            setClassName(
-                                "com.android.phone",
-                                "com.android.phone.NetworkSetting"
-                            )
-                            startActivity(this)
-                        }
-                    }
-                }
+                1 -> navigateToNetworkSettings()
+            }
+        }
+    }
+
+    private fun navigateToNetworkSettings() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            startActivity(Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY))
+        } else {
+            Intent(Intent.ACTION_MAIN).apply {
+                setClassName(
+                    "com.android.phone",
+                    "com.android.phone.NetworkSetting"
+                )
+                startActivity(this)
             }
         }
     }

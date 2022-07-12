@@ -18,7 +18,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import javax.inject.Inject
 
-class FavoriteAdapter @Inject constructor() : //TODO use base adapter
+class FavoriteAdapter @Inject constructor() :
     ListAdapter<AstronomyPicture, FavoriteAdapter.ViewHolder<OneItemFavoriteBinding>>(
         PlanetaryDiffUtil()
     ) {
