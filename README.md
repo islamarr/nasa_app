@@ -22,9 +22,9 @@ Architecture pattern Used
 Libraries & Tools Used
 --------------
 
-* [Foundation][4] - Components for core system capabilities, Kotlin extensions and support for
+* [Foundation][2] - Components for core system capabilities, Kotlin extensions and support for
   multidex and unit testing.
-* [Test][5] - An Android testing framework for unit and runtime UI tests.
+* [Test][3] - An Android testing framework for unit and runtime UI tests.
 * [Architecture][10] - A collection of libraries that help you design robust, testable, and
   maintainable apps. Start with classes for managing your UI component lifecycle and handling data
   persistence.
@@ -90,8 +90,9 @@ Other Projects
 
 
 [1]: https://cycle.js.org/model-view-intent.html
-[4]: https://developer.android.com/jetpack/components
-[5]: https://developer.android.com/training/testing/
+[2]: https://developer.android.com/jetpack/components
+[3]: https://developer.android.com/training/testing/
+
 [10]: https://developer.android.com/jetpack/arch/
 [11]: https://developer.android.com/topic/libraries/view-binding
 [12]: https://developer.android.com/topic/libraries/architecture/lifecycle

@@ -13,7 +13,7 @@ class DetailsRepositoryImpl @Inject constructor(
     private val dispatchers: AppCoroutineDispatchers
 ) : DetailsRepository {
 
-    override suspend fun addToFavoriteList(astronomyPicture: AstronomyPicture) { //TODO test add to fav and rotate
+    override suspend fun addToFavoriteList(astronomyPicture: AstronomyPicture) {
         favoriteDao.addToFavoriteList(astronomyPicture)
     }
 
