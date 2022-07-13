@@ -93,7 +93,7 @@ dependencies {
     // Lifecycle
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
 
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
@@ -119,17 +119,9 @@ dependencies {
     androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
     androidTestImplementation 'androidx.test:core-ktx:1.4.0'
     // Coroutines testing
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.2'
-    androidTestImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.2'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.3'
+    androidTestImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.3'
 
-    // Hilt testing dependency
-    androidTestImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
-    // Make Hilt generate code in the androidTest folder
-    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hilt_version"
-
-    debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
-    debugImplementation "androidx.test:core:$androidXTestCoreVersion"
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
-    androidTestImplementation "org.mockito:mockito-core:$mockitoVersion"
-    androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
+
 }
