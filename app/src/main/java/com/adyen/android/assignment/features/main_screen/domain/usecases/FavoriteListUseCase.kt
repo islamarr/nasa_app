@@ -18,8 +18,6 @@ class FavoriteListUseCase @Inject constructor(private val repository: DetailsRep
             if (it.isEmpty()) emit(MainScreenResults.EmptyFavoriteList)
             else emit(MainScreenResults.FavoriteListLoaded(it))
         }
-
-
     }
 
 }

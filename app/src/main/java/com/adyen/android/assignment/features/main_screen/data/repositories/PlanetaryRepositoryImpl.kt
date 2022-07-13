@@ -11,9 +11,8 @@ class PlanetaryRepositoryImpl @Inject constructor(
     private val dispatchers: AppCoroutineDispatchers,
     private val planetaryService: PlanetaryService
 ) : PlanetaryRepository {
-    override suspend fun getPictures(): NetworkResponse<List<AstronomyPicture>> {
-        return safeApiCall(dispatchers.io) {
+    override suspend fun getPictures(): NetworkResponse<List<AstronomyPicture>> =
+        safeApiCall(dispatchers.io) {
             planetaryService.getPictures()
         }
-    }
 }

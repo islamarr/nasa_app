@@ -10,7 +10,6 @@ import com.adyen.android.assignment.features.main_screen.domain.entities.Astrono
     entities = [AstronomyPicture::class],
     version = 1
 )
-//@TypeConverters(Converters::class)
 abstract class FavoriteDatabase : RoomDatabase() {
 
     abstract fun getFavoriteDao(): FavoriteDao

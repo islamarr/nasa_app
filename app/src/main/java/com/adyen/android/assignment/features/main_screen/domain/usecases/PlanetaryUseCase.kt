@@ -3,7 +3,6 @@ package com.adyen.android.assignment.features.main_screen.domain.usecases
 import com.adyen.android.assignment.common.data.NetworkResponse
 import com.adyen.android.assignment.features.main_screen.domain.repositories.PlanetaryRepository
 import com.adyen.android.assignment.features.main_screen.presentation.viewmodel.MainScreenResults
-import com.adyen.android.assignment.features.main_screen.presentation.viewmodel.MainScreenStates
 import javax.inject.Inject
 
 class PlanetaryUseCase @Inject constructor(private val repository: PlanetaryRepository) {

@@ -9,8 +9,10 @@ sealed class MainScreenStates : ViewState {
     object Loading : MainScreenStates()
     data class AstronomyListLoaded(val astronomyPictureList: List<AstronomyPicture>) :
         MainScreenStates()
+
     data class FilteredList(val astronomyPictureList: List<AstronomyPicture>) :
         MainScreenStates()
+
     data class FavoriteListLoaded(val astronomyPictureList: List<AstronomyPicture>) :
         MainScreenStates()
 

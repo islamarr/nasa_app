@@ -5,5 +5,6 @@ import com.adyen.android.assignment.features.main_screen.domain.entities.Astrono
 
 sealed class DetailsActions : Action {
     data class CheckAstronomyPictureFavorite(val title: String, val date: String) : DetailsActions()
-    data class SetFavoriteAction(val isAdd: Boolean, val astronomyPicture: AstronomyPicture) : DetailsActions()
+    data class SetFavoriteAction(val isAdd: Boolean, val astronomyPicture: AstronomyPicture) :
+        DetailsActions()
 }

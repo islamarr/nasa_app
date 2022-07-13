@@ -7,7 +7,7 @@ import com.adyen.android.assignment.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen() // TODO add splash screen to README
         super.onCreate(savedInstanceState)

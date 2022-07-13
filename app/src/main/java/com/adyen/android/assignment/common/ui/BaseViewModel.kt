@@ -6,13 +6,12 @@ import com.adyen.android.assignment.common.Action
 import com.adyen.android.assignment.common.Results
 import com.adyen.android.assignment.common.ViewEvents
 import com.adyen.android.assignment.common.ViewState
-import com.adyen.android.assignment.features.main_screen.presentation.viewmodel.MainScreenEvents
-import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-abstract class BaseViewModel<STATES : ViewState, ACTIONS : Action, EVENTS : ViewEvents, RESULT : Results> : ViewModel() {
+abstract class BaseViewModel<STATES : ViewState, ACTIONS : Action, EVENTS : ViewEvents, RESULT : Results> :
+    ViewModel() {
 
     val currentState: STATES
         get() = state.replayCache[0]

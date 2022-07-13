@@ -36,15 +36,13 @@ object NetworkModule {
         httpLoggingInterceptor: HttpLoggingInterceptor,
         urlInterceptor: URLInterceptor,
         connectivityInterceptor: ConnectivityInterceptorImpl
-    ): OkHttpClient {
-        return OkHttpClient.Builder()
-            .readTimeout(TIME_OUT_IN_SECONDS, TimeUnit.SECONDS)
-            .writeTimeout(TIME_OUT_IN_SECONDS, TimeUnit.SECONDS)
-            .addInterceptor(urlInterceptor)
-            .addInterceptor(httpLoggingInterceptor)
-            .addInterceptor(connectivityInterceptor)
-            .build()
-    }
+    ): OkHttpClient = OkHttpClient.Builder()
+        .readTimeout(TIME_OUT_IN_SECONDS, TimeUnit.SECONDS)
+        .writeTimeout(TIME_OUT_IN_SECONDS, TimeUnit.SECONDS)
+        .addInterceptor(urlInterceptor)
+        .addInterceptor(httpLoggingInterceptor)
+        .addInterceptor(connectivityInterceptor)
+        .build()
 
     @Singleton
     @Provides
@@ -64,13 +62,11 @@ object NetworkModule {
     fun provideRetrofit(
         okHttpClient: OkHttpClient,
         moshiConverterFactory: MoshiConverterFactory
-    ): Retrofit {
-        return Retrofit.Builder()
-            .client(okHttpClient)
-            .baseUrl(BuildConfig.NASA_BASE_URL)
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
-            .addConverterFactory(moshiConverterFactory)
-            .build()
-    }
+    ): Retrofit = Retrofit.Builder()
+        .client(okHttpClient)
+        .baseUrl(BuildConfig.NASA_BASE_URL)
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
+        .addConverterFactory(moshiConverterFactory)
+        .build()
 
 }

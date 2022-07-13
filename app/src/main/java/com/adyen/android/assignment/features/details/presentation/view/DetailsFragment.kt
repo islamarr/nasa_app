@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.adyen.android.assignment.R
 import com.adyen.android.assignment.common.IMAGE_SIZE_MULTIPLIER
+import com.adyen.android.assignment.common.ViewEvents
 import com.adyen.android.assignment.common.navigateUp
 import com.adyen.android.assignment.common.ui.BaseFragment
 import com.adyen.android.assignment.databinding.FragmentDetailsBinding
@@ -17,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DetailsFragment :
-    BaseFragment<FragmentDetailsBinding, DetailsStates, DetailsActions, DetailsEvents, DetailsResults>() {
+    BaseFragment<FragmentDetailsBinding, DetailsStates, DetailsActions, ViewEvents, DetailsResults>() {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentDetailsBinding
         get() = FragmentDetailsBinding::inflate

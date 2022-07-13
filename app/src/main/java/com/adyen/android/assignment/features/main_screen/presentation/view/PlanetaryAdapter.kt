@@ -19,7 +19,9 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import javax.inject.Inject
 
 class PlanetaryAdapter @Inject constructor() :
-    ListAdapter<AstronomyPicture, PlanetaryAdapter.ViewHolder<OneItemPlanetaryBinding>>(PlanetaryDiffUtil()) {
+    ListAdapter<AstronomyPicture, PlanetaryAdapter.ViewHolder<OneItemPlanetaryBinding>>(
+        PlanetaryDiffUtil()
+    ) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -47,7 +49,9 @@ class PlanetaryAdapter @Inject constructor() :
         binding.date.text = item.date
         binding.title.text = item.title
         view.rootView.setOnClickListener {
-            it.findNavController().navigate(MainScreenFragmentDirections.actionMainScreenFragmentToDetailsFragment(item))
+            it.findNavController().navigate(
+                MainScreenFragmentDirections.actionMainScreenFragmentToDetailsFragment(item)
+            )
         }
     }
 

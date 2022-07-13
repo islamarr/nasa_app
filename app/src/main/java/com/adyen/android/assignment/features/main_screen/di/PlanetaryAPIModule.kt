@@ -12,8 +12,7 @@ import retrofit2.Retrofit
 class PlanetaryAPIModule {
 
     @Provides
-    fun provideAPIService(retrofit: Retrofit): PlanetaryService {
-        return retrofit.create(PlanetaryService::class.java)
-    }
+    fun provideAPIService(retrofit: Retrofit): PlanetaryService =
+        retrofit.create(PlanetaryService::class.java)
 
 }
