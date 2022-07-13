@@ -19,14 +19,14 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import javax.inject.Inject
 
 class PlanetaryAdapter @Inject constructor() :
-    ListAdapter<AstronomyPicture, PlanetaryAdapter.ViewHolder<OneItemPlanetaryBinding>>(
+    ListAdapter<AstronomyPicture, PlanetaryAdapter.ViewHolder>(
         PlanetaryDiffUtil()
     ) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ViewHolder<OneItemPlanetaryBinding> {
+    ): ViewHolder {
         return ViewHolder(
             OneItemPlanetaryBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -36,7 +36,7 @@ class PlanetaryAdapter @Inject constructor() :
         )
     }
 
-    override fun onBindViewHolder(holder: ViewHolder<OneItemPlanetaryBinding>, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val listItems = getItem(position)
         bind(holder.binding, listItems, holder.itemView)
     }
@@ -55,7 +55,7 @@ class PlanetaryAdapter @Inject constructor() :
         }
     }
 
-    inner class ViewHolder<out T : ViewBinding>(val binding: OneItemPlanetaryBinding) :
+    inner class ViewHolder(val binding: OneItemPlanetaryBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     private fun loadImage(context: Context, url: String, imageView: ImageView) {

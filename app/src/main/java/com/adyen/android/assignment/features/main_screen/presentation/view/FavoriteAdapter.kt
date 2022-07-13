@@ -19,14 +19,14 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import javax.inject.Inject
 
 class FavoriteAdapter @Inject constructor() :
-    ListAdapter<AstronomyPicture, FavoriteAdapter.ViewHolder<OneItemFavoriteBinding>>(
+    ListAdapter<AstronomyPicture, FavoriteAdapter.ViewHolder>(
         PlanetaryDiffUtil()
     ) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ViewHolder<OneItemFavoriteBinding> {
+    ): ViewHolder {
         return ViewHolder(
             OneItemFavoriteBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -36,7 +36,7 @@ class FavoriteAdapter @Inject constructor() :
         )
     }
 
-    override fun onBindViewHolder(holder: ViewHolder<OneItemFavoriteBinding>, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val listItems = getItem(position)
         bind(holder.binding, listItems, holder.itemView)
     }
@@ -53,7 +53,7 @@ class FavoriteAdapter @Inject constructor() :
         }
     }
 
-    inner class ViewHolder<out T : ViewBinding>(val binding: OneItemFavoriteBinding) :
+    inner class ViewHolder(val binding: OneItemFavoriteBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     private fun loadImage(context: Context, url: String, imageView: ImageView) {

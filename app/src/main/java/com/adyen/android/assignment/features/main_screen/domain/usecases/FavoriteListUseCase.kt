@@ -11,7 +11,7 @@ import javax.inject.Inject
 @ViewModelScoped
 class FavoriteListUseCase @Inject constructor(private val repository: DetailsRepository) {
 
-    suspend fun execute(): Flow<MainScreenResults> = flow {
+    fun execute(): Flow<MainScreenResults> = flow {
 
         val result = repository.getFavoriteList()
         result.collect {

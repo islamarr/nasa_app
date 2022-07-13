@@ -69,7 +69,9 @@ abstract class BaseFragment<viewBinding : ViewBinding, STATES : ViewState, ACTIO
         }
     }
 
-    open fun handleViewState(it: STATES) {}
+    open fun handleViewState(it: STATES) {
+        //Override this function when needed
+    }
 
     override fun onDestroy() {
         _binding = null

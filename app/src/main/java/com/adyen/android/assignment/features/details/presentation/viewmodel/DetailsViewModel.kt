@@ -15,7 +15,7 @@ import javax.inject.Inject
 class DetailsViewModel @Inject constructor(
     private val getFavoriteUseCase: GetFavoriteUseCase,
     private val setFavoriteUseCase: SetFavoriteUseCase,
-    private val savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle
 ) :
     BaseViewModel<DetailsStates, DetailsActions, ViewEvents, DetailsResults>() {
 
